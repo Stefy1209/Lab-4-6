@@ -44,9 +44,9 @@ def set_img_part(cmp_number, value):
 
 def cmp_abs(cmp_number):
     '''
-
-    :param cmp_number:
-    :return:
+    finds the absolute value of a number
+    :param cmp_number: list
+    :return: float
     '''
     a = get_rl_part(cmp_number)
     b = get_img_part(cmp_number)

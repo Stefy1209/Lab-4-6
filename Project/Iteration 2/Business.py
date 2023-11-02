@@ -14,52 +14,61 @@ def create_cmp_number_and_add_to_list_position(rl_part, img_part, lst, position)
 
 def img_part(lst, start, end):
     '''
-
-    :param lst:
-    :param start:
-    :param end:
-    :return:
+    takes a list and prints the imaginary part of the numbers from start to end
+    :param lst: list
+    :param start: int
+    :param end: int
+    :return: -
     '''
     Infrastructure.print_img_part_sbq(lst, start, end)
 
 def abs_less(lst, x):
     '''
-
-    :param lst:
-    :param x:
-    :return:
+    takes a list and prints the numbers which their absolute value is less than x
+    :param lst: list
+    :param x: float
+    :return: -
     '''
     Infrastructure.print_abs_less(lst, x)
 
 def abs_equal(lst, x):
     '''
-
-    :param lst:
-    :param x:
-    :return:
+    takes a list and prints the numbers which their absolute values is equal to x
+    :param lst: list
+    :param x: float
+    :return: -
     '''
     Infrastructure.print_abs_equal(lst, x)
 
 def create_complex_numbers_and_change_in_list(rl_part1, img_part1, rl_part2, img_part2, lst):
+    '''
+    creates 2 complex numbers and changes the first complex number with the second
+    :params rl_part1: float
+    :params img_part1: float
+    :params rl_part2: float
+    :params img_part2: float
+    :params lst: list
+    :returns: -
+    '''
     cmp_number1 = Domain.create_cmp_number(rl_part1, img_part1)
     cmp_number2 = Domain.create_cmp_number(rl_part2, img_part2)
     Infrastructure.change_cmp_number(cmp_number1, cmp_number2, lst)
 
 def eliminate_sbq(lst, start, end):
     '''
-
-    :param lst:
-    :param start:
-    :param end:
-    :return:
+    eliminates a subsequence from a list
+    :param lst: list
+    :param start: int
+    :param end: int
+    :return: -
     '''
     Infrastructure.remove_sbq(lst, start, end)
 
 def eliminate_primes(lst):
     '''
-
-    :param lst:
-    :return:
+    eliminates the numbers which the real part is prime
+    :param lst: list
+    :return: -
     '''
     for i in lst:
         r = abs(Domain.get_rl_part(i))
@@ -68,10 +77,10 @@ def eliminate_primes(lst):
 
 def eliminate_less(lst, x):
     '''
-
-    :param lst:
-    :param x:
-    :return:
+    eliminates the numbers where the absolute value is less than x
+    :param lst: list
+    :param x: float
+    :return: -
     '''
     for i in lst:
         a = Domain.cmp_abs(i)
@@ -80,10 +89,10 @@ def eliminate_less(lst, x):
 
 def eliminate_equal(lst,x):
     '''
-
-    :param lst:
-    :param x:
-    :return:
+    eliminates the numbers which their absolute value is equal to x
+    :param lst: list
+    :param x: float
+    :return: -
     '''
     for i in lst:
         a = Domain.cmp_abs(i)
@@ -92,7 +101,7 @@ def eliminate_equal(lst,x):
 
 def eliminate_greater(lst, x):
     '''
-
+    eliminates the numbers which their absolute value is greater than x
     :param lst: list
     :param x: float
     :return: -
