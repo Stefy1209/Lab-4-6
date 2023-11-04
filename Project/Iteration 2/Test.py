@@ -1,8 +1,8 @@
 import Domain
 def test_create_cmp_number():
-    rl_part = 32.67
-    img_part = -0.246
-    assert Domain.create_cmp_number(rl_part, img_part) == [rl_part, img_part]
+   rl_part = 32.67
+   img_part = -0.246
+   assert Domain.create_cmp_number(rl_part, img_part) == {"real part": rl_part,"imaginary part": img_part}
 
 def test_get_rl_part():
     rl_part = -23423.5
@@ -22,7 +22,7 @@ def test_set_rl_part():
     cmp_number = Domain.create_cmp_number(rl_part, img_part)
     rl_part = 34.097
     Domain.set_rl_part(cmp_number, rl_part)
-    assert cmp_number == [rl_part, img_part]
+    assert cmp_number == {"real part": rl_part, "imaginary part": img_part}
 
 def  test_set_img_part():
     rl_part = -23423.5
@@ -30,7 +30,7 @@ def  test_set_img_part():
     cmp_number = Domain.create_cmp_number(rl_part, img_part)
     img_part = 36.4745
     Domain.set_img_part(cmp_number, img_part)
-    assert cmp_number == [rl_part, img_part]
+    assert cmp_number == {"real part": rl_part, "imaginary part": img_part}
 
 def test_cmp_abs():
     rl_part = 3

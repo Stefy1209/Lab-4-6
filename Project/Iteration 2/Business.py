@@ -82,10 +82,14 @@ def eliminate_less(lst, x):
     :param x: float
     :return: -
     '''
-    for i in lst:
+    i = 0
+    l = len(lst)
+    while(i < l):
         a = Domain.cmp_abs(i)
         if a < x and abs(a - x) > 0.001:
             lst.remove(i)
+            l -= 1
+        else: i += 1
 
 def eliminate_equal(lst,x):
     '''
@@ -94,10 +98,14 @@ def eliminate_equal(lst,x):
     :param x: float
     :return: -
     '''
-    for i in lst:
+    i = 0
+    l = len(lst)
+    while(i < l):
         a = Domain.cmp_abs(i)
         if abs(a - x) < 0.001:
             lst.remove(i)
+            l -= 1
+        else: i += 1
 
 def eliminate_greater(lst, x):
     '''
@@ -106,10 +114,14 @@ def eliminate_greater(lst, x):
     :param x: float
     :return: -
     '''
-    for i in lst:
+    i = 0
+    l = len(lst)
+    while(i < l):
         a = Domain.cmp_abs(i)
         if a > x and abs(a - x) > 0.001:
             lst.remove(i)
+            l -= 1
+        else: i += 1
 
 def print_help_UI():
     print("For every action you want to make you have to type a comand:")

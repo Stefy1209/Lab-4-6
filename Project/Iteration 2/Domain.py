@@ -6,7 +6,7 @@ def create_cmp_number(rl_part, img_part):
     :param img_part: float
     :return: list
     '''
-    return [rl_part, img_part]
+    return {"real part": rl_part, "imaginary part": img_part}
 
 def get_rl_part(cmp_number):
     '''
@@ -14,7 +14,7 @@ def get_rl_part(cmp_number):
     :param cmp_number: list
     :return: float
     '''
-    return cmp_number[0]
+    return cmp_number["real part"]
 
 def get_img_part(cmp_number):
     '''
@@ -22,7 +22,7 @@ def get_img_part(cmp_number):
     :param cmp_number: list
     :return: float
     '''
-    return cmp_number[1]
+    return cmp_number["imaginary part"]
 
 def set_rl_part(cmp_number, value):
     '''
@@ -31,7 +31,7 @@ def set_rl_part(cmp_number, value):
     :param value: float
     :return: -
     '''
-    cmp_number[0] = value
+    cmp_number["real part"] = value
 
 def set_img_part(cmp_number, value):
     '''
@@ -40,7 +40,7 @@ def set_img_part(cmp_number, value):
     :param value: float
     :return: -
     '''
-    cmp_number[1] = value
+    cmp_number["imaginary part"] = value
 
 def cmp_abs(cmp_number):
     '''
