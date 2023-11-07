@@ -27,18 +27,19 @@ def parameters_add(parameters, list):
         errors += 'there are no parameters!\n'
 
     if len(parameters) == 1:
-        if not comand.is_number(parameters[0]):
-            errors += 'invalid number!\n'
+        """if not comand.is_number(parameters[0]):
+            errors += 'invalid number!\n'"""
 
     if len(parameters) == 2:
-        if not comand.is_number(parameters[0]):
-            errors += 'invalid number!\n'
+        """if not comand.is_number(parameters[0]):
+            errors += 'invalid number!\n'"""
 
         if not parameters[1].isdigit():
             errors += parameters[1]
             errors += ' is not a position!\n'
-        elif not comand.is_good_position(parameters[1], list):
-            errors += 'invalid position!\n'
 
     if len(errors) > 0:
         raise SyntaxError(errors)
+
+def parameters_modify(parameeters):
+    pass

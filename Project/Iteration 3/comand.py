@@ -4,7 +4,17 @@ def get_real_part(number):
     :param number: string
     :return: float
     '''
-    pass
+    number = number.strip()
+    if '+' in number[1:]:
+        number = number.split('+')
+
+    elif '-' in number[1:]:
+        number = number.split('-')
+
+    if number[0] == '':
+        return -float(number[1])
+
+    return float(number[0])
 
 def get_imaginary_part(number):
     '''
@@ -12,7 +22,16 @@ def get_imaginary_part(number):
     :param number: string
     :return: float
     '''
-    pass
+    number = number.strip().strip('i')
+    if '+' in number:
+        number = number.split('+')
+        return float(number[1])
+
+    elif '-' in number:
+        number = number.split('-')
+        if number[0] == '':
+            return -float(number[2])
+        return -float(number[1])
 
 def is_number(number):
     '''
@@ -22,34 +41,53 @@ def is_number(number):
     '''
     pass
 
-def is_good_position(position, list):
+def get_position(position):
     '''
     verifies if a number can be added to a list at the given string position
     :param position: string
     :param list: list
-    :return: bool
+    :return: int
     '''
     p = int(position)
+    return p
 
-    if p < 0 or len(list) < p:
-        return False
-
-    return True
-
-def get_action(comand):
+def get_action(cmd):
     '''
     takes a comand and returns the action in it
     :param comand: string
     :return: string
     '''
-    comand = comand.strip().split()
-    return comand[0]
+    cmd = cmd.strip().split()
+    return cmd[0]
 
-def get_parameters(comand):
+def get_parameters(cmd):
     '''
     takes a comand and returns the parameters in it
     :param comand: string
     :return: string
     '''
-    comand = comand.strip().split()
-    return comand[1:]
+    cmd = cmd.strip().split()
+    return cmd[1:]
+
+def get_start(subsequence):
+    '''
+    gets a subsequence and returns the start of it
+    :param subsequence: string
+    :return: int
+    '''
+    subsequence = subsequence.strip().split('-')
+    start = int(subsequence[0])
+    return start
+
+def get_end(subsequence):
+    '''
+    gets a subsequence and returns the end of it
+    :param subsequence: list
+    :return: int
+    '''
+    subsequence = subsequence.strip().split('-')
+    if len(subsequence) == 1:
+        end = int(subsequence[0])
+    else:
+        end = int(subsequence[1])
+    return end
