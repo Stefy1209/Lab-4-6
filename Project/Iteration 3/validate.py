@@ -41,5 +41,14 @@ def parameters_add(parameters, list):
     if len(errors) > 0:
         raise SyntaxError(errors)
 
-def parameters_modify(parameeters):
+def parameters_modify(parameters):
+    pass
+
+def parameters_search(parameters):
+    pass
+
+def parameters_operate(parameters):
+    pass
+
+def parameters_filter(parameters):
     pass

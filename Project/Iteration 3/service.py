@@ -6,6 +6,7 @@ import validate
 def main():
     list = []
     finished = False
+    history = []
 
     while not finished:
         cmd = input(">>> ")
@@ -74,11 +75,85 @@ def main():
                         infrastructure.replace_number1_with_number2_list(number1, number2, list)
 
             case 'search':
-                pass
+                ok = True
+
+                try:
+                    validate.parameters_search(parameters)
+                except SyntaxError as se:
+                    print(se, end = '')
+                    ok = false
+
+                if ok:
+                    if parameters[0][0].isdigit():
+                        start = comand.get_start(parameters[0])
+                        end = comand.get_end(parameters[0])
+
+                        imaginaryList = infrastructure.get_imaginary_parts(list, start-1, end-1)
+
+                        print(imaginaryList)
+
+                    if parameters[0] == '<':
+                        newList = infrastructure.get_less(list)
+
+                        print(newList)
+
+                    if parameters[0] == '=':
+                        newList = infrastructure.get_equal(list)
+
+                        print(newList)
+
             case 'operate':
-                pass
+                ok = True
+
+                try:
+                    validate.parameters_operate(parameters)
+                except SyntaxError as es:
+                    print(es)
+                    ok = False
+
+                if ok:
+                    if parameters[0] == 'sum':
+                        start = comand.get_start(parameters[1])
+                        end = comand.get_end(parameters[1])
+
+                        sum = infrastructure.get_sum_subsequence(list, start-1, end-1)
+
+                        print(sum)
+
+                    if parameters[0] == 'product':
+                        start = comand.get_start(parameters[1])
+                        end = comand.get_end(parameters[1])
+
+                        product = infrastructure.get_product_subsequence(list, start-1, end-1)
+
+                        print(product)
+
+                    if parameters[0] == 'descent':
+                        newList = list.copy()
+
+                        infrastructure.sort_descent_imaginary(newList)
+
+                        print(newList)
             case 'filter':
-                pass
+                 ok = True
+
+                 try:
+                     validate.parameters_filter(parameters)
+                 except SyntaxError as se:
+                     print(se, end = '')
+                     ok = False
+
+                 if ok:
+                     if parameters[0] == 'primes':
+                         newList = list.copy()
+
+                         infrastructure.eliminate_primes(newList)
+
+                         print(newList)
+
+                     if parameters[0] == '<':
+                         pass
+
             case 'undo':
                 pass
             case 'print':

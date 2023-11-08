@@ -1,6 +1,7 @@
 import cmpnumber
 import infrastructure
 import comand
+
 def test_get_abs_value():
     realPart = 2.456
     imaginaryPart = -0.124
@@ -147,6 +148,19 @@ def test_replace_number1_with_number2_list():
     infrastructure.replace_number1_with_number2_list(number1, number3, list)
     assert list == [number3, number2, number2, number3, number3, number2]
 
+def test_is_prime():
+    a = 1
+    assert infrastructure.is_prime(a) == False
+
+    a = 2
+    assert infrastructure.is_prime(a) == True
+
+    a = 2.0
+    assert infrastructure.is_prime(a) == True
+
+    a = -2
+    assert infrastructure.is_prime(a) == False
+
 def test_get_real_part():
     """number = '3'
     realPart = comand.get_real_part(number)
@@ -224,6 +238,7 @@ def test_comand():
     test_get_start()
     test_get_end()
     test_replace_number1_with_number2_list()
+    test_is_prime()
 
 def run_tests():
     test_cmpnumber()
