@@ -5,7 +5,7 @@ def action(action):
     :param action: string
     :return: -
     '''
-    listAction = ['add', 'modify', 'search', 'operate', 'filter', 'undo', 'print', 'exit']
+    listAction = ['add', 'modify', 'search', 'operate', 'filter', 'undo', 'print', 'exit', 'help']
     errors = ''
 
     if not action in listAction:

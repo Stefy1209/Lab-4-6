@@ -7,12 +7,17 @@ def main():
     list = []
     finished = False
     history = []
+    modified = True
 
     while not finished:
         cmd = input(">>> ")
         cmd = cmd.lower()
         action = comand.get_action(cmd)
         parameters = comand.get_parameters(cmd)
+
+        if modified:
+            newList = list.copy()
+            history.append(newList)
 
         validAction = True
 
@@ -47,6 +52,8 @@ def main():
 
                     infrastructure.add_number_to_list_position(number, list, position - 1)
 
+                    modified = True
+
             case 'modify':
                 ok = True
 
@@ -73,6 +80,8 @@ def main():
                         number2 = cmpnumber.create_complex_number(realPart2, imaginaryPart2)
 
                         infrastructure.replace_number1_with_number2_list(number1, number2, list)
+
+                    modified = True
 
             case 'search':
                 ok = True
@@ -101,6 +110,8 @@ def main():
                         newList = infrastructure.get_equal(list)
 
                         print(newList)
+
+                    modified = False
 
             case 'operate':
                 ok = True
@@ -134,6 +145,9 @@ def main():
                         infrastructure.sort_descent_imaginary(newList)
 
                         print(newList)
+
+                    modified = False
+
             case 'filter':
                  ok = True
 
@@ -152,11 +166,54 @@ def main():
                          print(newList)
 
                      if parameters[0] == '<':
-                         pass
+                         newList = list.copy()
+
+                         number = float(parameters[1])
+
+                         infrastructure.eliminate_less(newList, number)
+
+                         print(newList)
+
+                     if parameters[0] == '=':
+                         newList = list.copy()
+
+                         number = float(parameters[1])
+
+                         infrastructure.eliminate_equal(newList, number)
+
+                         print(newList)
+
+                     if parameters[0] == '>':
+                         newList = list.copy()
+
+                         number = float(parameters[1])
+
+                         infrastructure.eliminate_greater(newList, number)
+
+                         print(newList)
+
+                     modified = False
 
             case 'undo':
-                pass
+                if len(history) > 1:
+                    print(len(history))
+                    history.remove(history[len(history) - 1])
+                    list = history[len(history) - 1].copy()
+
+                    modified = False
+
+                else:
+                    print('your list is already empty!')
+
             case 'print':
                 print(list)
+
+                modified = False
+
             case 'exit':
                 finished = True
+
+            case 'help':
+                infrastructure.print_menu_help()
+
+                modified = False

@@ -191,7 +191,7 @@ def eliminate_primes(list):
     '''
     eliminates the numbers that the real part is prime
     :param list: list
-    :return: list
+    :return: -
     '''
     i = 0
     while i < len(list):
@@ -204,4 +204,90 @@ def eliminate_primes(list):
         else:
             i += 1
 
-    return list
+def eliminate_less(list, number):
+    '''
+    eliminates the numbers that tha absoulte value is less than a given number
+    :param list: list
+    :param number: float
+    :return: -
+    '''
+    i = 0
+    while(i < len(list)):
+        x = list[i]
+
+        if cmpnumber.is_less(x, number):
+            list.remove(x)
+
+        else:
+            i += 1
+
+def eliminate_equal(list, number):
+    '''
+    eliminates the numbers that tha absoulte value is equal to a given number
+    :param list: list
+    :param number: float
+    :return: -
+    '''
+    i = 0
+    while(i < len(list)):
+        x = list[i]
+
+        if cmpnumber.is_equal(x, number):
+            list.remove(x)
+
+        else:
+            i += 1
+
+def eliminate_greater(list, number):
+    '''
+    eliminates the numbers that tha absoulte value is greater than a given number
+    :param list: list
+    :param number: float
+    :return: -
+    '''
+    i = 0
+    while(i < len(list)):
+        x = list[i]
+
+        if cmpnumber.is_greater(x, number):
+            list.remove(x)
+
+        else:
+            i += 1
+
+def print_menu_help():
+    '''
+    prints menu for help
+    :return: -
+    '''
+    print("""
+    Every comand respects the formula 'action' + 'parameteres':
+    1.'add'
+        1.1 'add' + complex number:            -add complex number at the end of the list
+        1.2 'add' + complex number + position: -add complex number at a position
+        
+    2.'modify'
+        2.1 'modify' + position:                        -eliminates the number from a position
+        2.2 'modify' + subsequence:                     -eliminates the numbers from a subsequence
+        2.3 'modify' + complex number + complex number: -swap the first complex number with the second one
+        
+    3.'search'
+        3.1 'search' + subsequence: -shows the imaginary part of the numbers from a subsequence 
+        3.2 'search' + '<':         -shows the numbers that the absolute value is less than 10
+        3.3 'search' + '=':         -shows the numbers that the absolute value is equal to 10 
+        
+    4.'operate'
+        4.1 'operate' + 'sum' + subsequence:     -shows the sum of the numbers from a subsequence
+        4.2 'operate' + 'product' + subsequence: -shows the product of the numbers from a subsequence
+        4.3 'operate' + 'descent':               -shows the list descendent by the imaginary part
+        
+    5.'filter'
+        5.1 'filter' + 'primes':     -removes temporarily the numbers that the real part is prime 
+        5.2 'filter' + '<' + number: -removes temporarily the numbers that the absolute value is less than a number
+        5.3 'filter' + '=' + number: -removes temporarily the numbers that the absolute value is equal to a number
+        5.4 'filter' + '>' + number: -removes temporarily the numbers that the absolute value is greater than a number
+        
+    6.'undo'
+    
+    7.'print'
+    """)
