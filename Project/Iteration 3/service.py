@@ -58,8 +58,8 @@ def main():
                 ok = True
 
                 try:
-                    validate.parameters_modify(parameters)
-                except SyntaxError as es:
+                    validate.parameters_modify(parameters, list)
+                except SyntaxError as se:
                     print(se, end = '')
                     ok = False
 
@@ -87,10 +87,10 @@ def main():
                 ok = True
 
                 try:
-                    validate.parameters_search(parameters)
+                    validate.parameters_search(parameters, list)
                 except SyntaxError as se:
                     print(se, end = '')
-                    ok = false
+                    ok = False
 
                 if ok:
                     if parameters[0][0].isdigit():
@@ -118,8 +118,8 @@ def main():
 
                 try:
                     validate.parameters_operate(parameters)
-                except SyntaxError as es:
-                    print(es)
+                except SyntaxError as se:
+                    print(se)
                     ok = False
 
                 if ok:

@@ -39,6 +39,65 @@ def is_number(number):
     :param number: string
     :return: bool
     '''
+    string = [*number]
+
+    if string[0] != '-' and string[0] != '+':
+        string.insert(0,'+')
+
+    i = 1
+    cnt_dot = 0
+    cnt_digit = 0
+    while i < len(string) and string[i] != '-' and string[i] != '+':
+        if not string[i].isdigit():
+            if string[i] != '.':
+                return False
+            cnt_dot += 1
+            if cnt_dot > 1:
+                return False
+
+        cnt_digit += 1
+        i += 1
+
+    if cnt_digit == 0:
+        return False
+
+    if i == len(string):
+        return False
+
+    i += 1
+    cnt_dot = 0
+    cnt_digit = 0
+    while i < len(string) and string[i] != 'i':
+        if not string[i].isdigit():
+            if string[i] != '.':
+                return False
+            cnt_dot += 1
+            if cnt_dot > 1:
+                return False
+
+        cnt_digit += 1
+        i += 1
+
+    if cnt_digit == 0:
+        return False
+
+    if i == len(string):
+        return False
+
+    return True
+
+def is_integer(position):
+    '''
+    verifies if position is an integer
+    :param position: string
+    :return: bool
+    '''
+    if not position.isdecimal():
+        return False
+
+    return True
+
+def is_subsequence(subsequence):
     pass
 
 def get_position(position):

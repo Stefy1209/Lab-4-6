@@ -1,6 +1,8 @@
 import cmpnumber
 import infrastructure
 import comand
+import validate
+
 
 def test_get_abs_value():
     realPart = 2.456
@@ -161,63 +163,51 @@ def test_is_prime():
     a = -2
     assert infrastructure.is_prime(a) == False
 
+def test_parameters_modify():
+    parameters = '1-3'
+    list = [1, 2, 3]
+    se = ''
+    try:
+        validate.parameters_modify(parameters, list)
+    except SyntaxError as se:
+        pass
+
+    assert se == ''
+
+    parameters = '4'
+    try:
+        validate.parameters_modify(parameters, list)
+    except SyntaxError as se:
+        pass
+
 def test_get_real_part():
-    """number = '3'
-    realPart = comand.get_real_part(number)
-    assert realPart == 3
-
-    number = '-3'
-    number = comand.get_real_part(number)
-    assert realPart == -3
-
-    number = '2i'
-    realPart = comand.get_real_part(number)
-    assert realPart == 0
-
-    number = '-3i'
-    realPart = comand.get_real_part(number)
-    assert realPart == 0"""
-
     number = '-2.243+3.90i'
     realPart = comand.get_real_part(number)
     assert realPart == -2.243
 
 def test_get_imaginaty_part():
-    """number = '3'
-    imaginaryPart = comand.get_imaginary_part(number)
-    assert imaginaryPart == 0
-
-    number = '-2.3'
-    imaginaryPart = comand.get_imaginary_part(number)
-    assert imaginaryPart == 0
-
-    number = '2i'
-    imaginaryPart = comand.get_imaginary_part(number)
-    assert imaginaryPart == 2
-
-    number = '-3.01i'
-    imaginaryPart = comand.get_imaginary_part(number)
-    assert imaginaryPart == -3.01"""
-
     number = '2-3i'
     imaginaryPart = comand.get_imaginary_part(number)
     assert imaginaryPart == -3.0
 
 def test_is_number():
-    """number = '2'
-    assert comand.is_number(number) == True
-
-    number= '-3.2'
-    assert comand.is_number(number) == True
-
-    number = '2i'
-    assert comand.is_number(number) == True
-
-    number = '-2.5i'
-    assert comand.is_number(number) == True"""
-
     number = '2+3i'
     assert comand.is_number(number) == True
+
+    number = '2.4+3.2i'
+    assert comand.is_number(number) == True
+
+    number = '-2+3i'
+    assert comand.is_number(number) == True
+
+    number = '-2.2222-3.3333i'
+    assert comand.is_number(number) == True
+
+    number = '2+2'
+    assert comand.is_number(number) == False
+
+    number = 'a'
+    assert comand.is_number(number) == False
 
 def test_cmpnumber():
     test_get_abs_value()
@@ -232,7 +222,7 @@ def test_infrastructure():
 def test_comand():
     test_get_real_part()
     test_get_imaginaty_part()
-    #test_is_number()
+    test_is_number()
     test_get_action()
     test_get_parameters()
     test_get_start()
@@ -240,7 +230,11 @@ def test_comand():
     test_replace_number1_with_number2_list()
     test_is_prime()
 
+def test_validate():
+    test_parameters_modify()
+
 def run_tests():
     test_cmpnumber()
     test_infrastructure()
     test_comand()
+    test_validate()

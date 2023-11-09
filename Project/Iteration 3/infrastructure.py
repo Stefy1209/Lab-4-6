@@ -263,13 +263,13 @@ def print_menu_help():
     print("""
     Every comand respects the formula 'action' + 'parameteres':
     1.'add'
-        1.1 'add' + complex number:            -add complex number at the end of the list
-        1.2 'add' + complex number + position: -add complex number at a position
+        1.1 'add' + complex number:            -adds complex number at the end of the list
+        1.2 'add' + complex number + position: -adds complex number at a position
         
     2.'modify'
         2.1 'modify' + position:                        -eliminates the number from a position
         2.2 'modify' + subsequence:                     -eliminates the numbers from a subsequence
-        2.3 'modify' + complex number + complex number: -swap the first complex number with the second one
+        2.3 'modify' + complex number + complex number: -swaps the first complex number with the second one
         
     3.'search'
         3.1 'search' + subsequence: -shows the imaginary part of the numbers from a subsequence 
@@ -287,7 +287,9 @@ def print_menu_help():
         5.3 'filter' + '=' + number: -removes temporarily the numbers that the absolute value is equal to a number
         5.4 'filter' + '>' + number: -removes temporarily the numbers that the absolute value is greater than a number
         
-    6.'undo'
+    6.'undo': -undo the last modification done to tha list
     
-    7.'print'
+    7.'print': -shows list
+    
+    8.'exit': -close program
     """)
