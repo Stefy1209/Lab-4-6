@@ -196,7 +196,7 @@ def main():
 
             case 'undo':
                 if len(history) > 1:
-                    print(len(history))
+                    print(history)
                     history.remove(history[len(history) - 1])
                     list = history[len(history) - 1].copy()
 
