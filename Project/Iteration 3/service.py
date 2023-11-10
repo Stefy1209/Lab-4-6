@@ -5,215 +5,225 @@ import validate
 
 def main():
     list = []
-    finished = False
     history = []
+    ListCmd = []
+    finished = False
     modified = True
 
     while not finished:
-        cmd = input(">>> ")
-        cmd = cmd.lower()
-        action = comand.get_action(cmd)
-        parameters = comand.get_parameters(cmd)
+        if ListCmd == []:
+            cmd = input(">>> ")
+            cmd = cmd.lower()
+            ListCmd = cmd.strip().split(';')
 
-        if modified:
-            newList = list.copy()
-            history.append(newList)
+        while ListCmd != []:
+            cmd = ListCmd[0].strip()
+            ListCmd = ListCmd[1:]
+            if cmd != '':
+                action = comand.get_action(cmd)
+                parameters = comand.get_parameters(cmd)
 
-        validAction = True
+                if modified:
+                    newList = list.copy()
+                    history.append(newList)
 
-        try:
-            validate.action(action)
-        except SyntaxError as se:
-            print(se, end = '')
-            validAction = False
-
-        match action:
-            case 'add':
-                ok = True
+                validAction = True
 
                 try:
-                    validate.parameters_add(parameters, list)
+                    validate.action(action)
                 except SyntaxError as se:
                     print(se, end = '')
-                    ok = False
+                    validAction = False
 
-                if ok:
-                    realPart = 0
-                    imaginaryPart = 0
-                    position = len(list)+1
+                match action:
+                    case 'add':
+                        ok = True
 
-                    realPart = comand.get_real_part(parameters[0])
-                    imaginaryPart = comand.get_imaginary_part(parameters[0])
+                        try:
+                            validate.parameters_add(parameters, list)
+                        except SyntaxError as se:
+                            print(se, end = '')
+                            ok = False
 
-                    number = cmpnumber.create_complex_number(realPart,imaginaryPart)
+                        if ok:
+                            realPart = 0
+                            imaginaryPart = 0
+                            position = len(list)+1
 
-                    if len(parameters) > 1:
-                        position = comand.get_position(parameters[1])
+                            realPart = comand.get_real_part(parameters[0])
+                            imaginaryPart = comand.get_imaginary_part(parameters[0])
 
-                    infrastructure.add_number_to_list_position(number, list, position - 1)
+                            number = cmpnumber.create_complex_number(realPart,imaginaryPart)
 
-                    modified = True
+                            if len(parameters) > 1:
+                                position = comand.get_position(parameters[1])
 
-            case 'modify':
-                ok = True
+                            infrastructure.add_number_to_list_position(number, list, position - 1)
 
-                try:
-                    validate.parameters_modify(parameters, list)
-                except SyntaxError as se:
-                    print(se, end = '')
-                    ok = False
+                            modified = True
 
-                if ok:
-                    if len(parameters) == 1:
-                        start = comand.get_start(parameters[0])
-                        end = comand.get_end(parameters[0])
+                    case 'modify':
+                        ok = True
 
-                        infrastructure.eliminate_from_list(list, start-1, end-1)
+                        try:
+                            validate.parameters_modify(parameters, list)
+                        except SyntaxError as se:
+                            print(se, end = '')
+                            ok = False
 
-                    if len(parameters) == 2:
-                        realPart1 = comand.get_real_part(parameters[0])
-                        imaginaryPart1 = comand.get_imaginary_part(parameters[0])
-                        number1 = cmpnumber.create_complex_number(realPart1, imaginaryPart1)
+                        if ok:
+                            if len(parameters) == 1:
+                                start = comand.get_start(parameters[0])
+                                end = comand.get_end(parameters[0])
 
-                        realPart2 = comand.get_real_part(parameters[1])
-                        imaginaryPart2 = comand.get_imaginary_part(parameters[1])
-                        number2 = cmpnumber.create_complex_number(realPart2, imaginaryPart2)
+                                infrastructure.eliminate_from_list(list, start-1, end-1)
 
-                        infrastructure.replace_number1_with_number2_list(number1, number2, list)
+                            if len(parameters) == 2:
+                                realPart1 = comand.get_real_part(parameters[0])
+                                imaginaryPart1 = comand.get_imaginary_part(parameters[0])
+                                number1 = cmpnumber.create_complex_number(realPart1, imaginaryPart1)
 
-                    modified = True
+                                realPart2 = comand.get_real_part(parameters[1])
+                                imaginaryPart2 = comand.get_imaginary_part(parameters[1])
+                                number2 = cmpnumber.create_complex_number(realPart2, imaginaryPart2)
 
-            case 'search':
-                ok = True
+                                infrastructure.replace_number1_with_number2_list(number1, number2, list)
 
-                try:
-                    validate.parameters_search(parameters, list)
-                except SyntaxError as se:
-                    print(se, end = '')
-                    ok = False
+                            modified = True
 
-                if ok:
-                    if parameters[0][0].isdigit():
-                        start = comand.get_start(parameters[0])
-                        end = comand.get_end(parameters[0])
+                    case 'search':
+                        ok = True
 
-                        imaginaryList = infrastructure.get_imaginary_parts(list, start-1, end-1)
+                        try:
+                            validate.parameters_search(parameters, list)
+                        except SyntaxError as se:
+                            print(se, end = '')
+                            ok = False
 
-                        print(imaginaryList)
+                        if ok:
+                            if parameters[0][0].isdigit():
+                                start = comand.get_start(parameters[0])
+                                end = comand.get_end(parameters[0])
 
-                    if parameters[0] == '<':
-                        newList = infrastructure.get_less(list)
+                                imaginaryList = infrastructure.get_imaginary_parts(list, start-1, end-1)
 
-                        print(newList)
+                                print(imaginaryList)
 
-                    if parameters[0] == '=':
-                        newList = infrastructure.get_equal(list)
+                            if parameters[0] == '<':
+                                newList = infrastructure.get_less(list)
 
-                        print(newList)
+                                print(newList)
 
-                    modified = False
+                            if parameters[0] == '=':
+                                newList = infrastructure.get_equal(list)
 
-            case 'operate':
-                ok = True
+                                print(newList)
 
-                try:
-                    validate.parameters_operate(parameters)
-                except SyntaxError as se:
-                    print(se)
-                    ok = False
+                            modified = False
 
-                if ok:
-                    if parameters[0] == 'sum':
-                        start = comand.get_start(parameters[1])
-                        end = comand.get_end(parameters[1])
+                    case 'operate':
+                        ok = True
 
-                        sum = infrastructure.get_sum_subsequence(list, start-1, end-1)
+                        try:
+                            validate.parameters_operate(parameters)
+                        except SyntaxError as se:
+                            print(se, end = '')
+                            ok = False
 
-                        print(sum)
+                        if ok:
+                            if parameters[0] == 'sum':
+                                start = comand.get_start(parameters[1])
+                                end = comand.get_end(parameters[1])
 
-                    if parameters[0] == 'product':
-                        start = comand.get_start(parameters[1])
-                        end = comand.get_end(parameters[1])
+                                sum = infrastructure.get_sum_subsequence(list, start-1, end-1)
 
-                        product = infrastructure.get_product_subsequence(list, start-1, end-1)
+                                print(sum)
 
-                        print(product)
+                            if parameters[0] == 'product':
+                                start = comand.get_start(parameters[1])
+                                end = comand.get_end(parameters[1])
 
-                    if parameters[0] == 'descent':
-                        newList = list.copy()
+                                product = infrastructure.get_product_subsequence(list, start-1, end-1)
 
-                        infrastructure.sort_descent_imaginary(newList)
+                                print(product)
 
-                        print(newList)
+                            if parameters[0] == 'descent':
+                                newList = list.copy()
 
-                    modified = False
+                                infrastructure.sort_descent_imaginary(newList)
 
-            case 'filter':
-                 ok = True
+                                print(newList)
 
-                 try:
-                     validate.parameters_filter(parameters)
-                 except SyntaxError as se:
-                     print(se, end = '')
-                     ok = False
+                            modified = False
 
-                 if ok:
-                     if parameters[0] == 'primes':
-                         newList = list.copy()
+                    case 'filter':
+                         ok = True
 
-                         infrastructure.eliminate_primes(newList)
+                         try:
+                             validate.parameters_filter(parameters)
+                         except SyntaxError as se:
+                             print(se, end = '')
+                             ok = False
 
-                         print(newList)
+                         if ok:
+                             if parameters[0] == 'primes':
+                                 newList = list.copy()
 
-                     if parameters[0] == '<':
-                         newList = list.copy()
+                                 infrastructure.eliminate_primes(newList)
 
-                         number = float(parameters[1])
+                                 print(newList)
 
-                         infrastructure.eliminate_less(newList, number)
+                             if parameters[0] == '<':
+                                 newList = list.copy()
 
-                         print(newList)
+                                 number = float(parameters[1])
 
-                     if parameters[0] == '=':
-                         newList = list.copy()
+                                 infrastructure.eliminate_less(newList, number)
 
-                         number = float(parameters[1])
+                                 print(newList)
 
-                         infrastructure.eliminate_equal(newList, number)
+                             if parameters[0] == '=':
+                                 newList = list.copy()
 
-                         print(newList)
+                                 number = float(parameters[1])
 
-                     if parameters[0] == '>':
-                         newList = list.copy()
+                                 infrastructure.eliminate_equal(newList, number)
 
-                         number = float(parameters[1])
+                                 print(newList)
 
-                         infrastructure.eliminate_greater(newList, number)
+                             if parameters[0] == '>':
+                                 newList = list.copy()
 
-                         print(newList)
+                                 number = float(parameters[1])
 
-                     modified = False
+                                 infrastructure.eliminate_greater(newList, number)
 
-            case 'undo':
-                if len(history) > 1:
-                    print(history)
-                    history.remove(history[len(history) - 1])
-                    list = history[len(history) - 1].copy()
+                                 print(newList)
 
-                    modified = False
+                             modified = False
 
-                else:
-                    print('your list is already empty!')
+                    case 'undo':
+                        if len(history) > 1:
+                            print(history)
+                            history.remove(history[len(history) - 1])
+                            list = history[len(history) - 1].copy()
 
-            case 'print':
-                print(list)
+                            modified = False
 
-                modified = False
+                        else:
+                            print('your list is already empty!')
 
-            case 'exit':
-                finished = True
+                    case 'print':
+                        print(list)
 
-            case 'help':
-                infrastructure.print_menu_help()
+                        modified = False
 
-                modified = False
+                    case 'exit':
+                        finished = True
+
+                    case 'help':
+                        infrastructure.print_menu_help()
+
+                        modified = False
+            else:
+                print('there is no comand!')

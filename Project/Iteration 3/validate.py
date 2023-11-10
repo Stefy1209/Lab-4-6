@@ -141,7 +141,34 @@ def parameters_search(parameters, list):
         raise SyntaxError(errors)
 
 def parameters_operate(parameters):
-    pass
+    errors = ''
+
+    if len(parameters) == 0:
+        errors += 'there are no parameters!\n'
+
+    if len(parameters) == 1 and not parameters[0] in ['sum', 'product', 'descent']:
+        errors += 'invalid parameter!\n'
+
+    if len(errors) > 0:
+        raise SyntaxError(errors)
 
 def parameters_filter(parameters):
-    pass
+    errors = ''
+
+    if len(parameters) == 0:
+        errors += 'there are no parameters!\n'
+
+    if len(parameters) == 1:
+        if parameters[0] != 'primes':
+            errors += parameters[0]
+            errors += ' does not exist!\n'
+
+    if len(parameters) == 2:
+        if not parameters[0] in ['<', '=', '<']:
+            errors += 'invalid operater!\n'
+
+        if not parameters[1].isdecimal():
+            errors += 'invalid number!\n'
+
+    if len(errors) > 0:
+        raise SyntaxError(errors)
